@@ -22,7 +22,7 @@ const Home: NextPage = () => {
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <div className="text-white text-2xl">One</div>
-            <div className="text-white text-3xl">Two</div>
+            <div className="text-white text-3xl">Clay`&apos;`s Super Secret</div>
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-lg text-white">
