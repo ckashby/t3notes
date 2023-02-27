@@ -9,6 +9,12 @@ export const Header = () => {
         {sessionData?.user?.name ? `Notes for ${sessionData.user.name}` : ""}
       </div>
       <div className="flex-none gap-2">
+        <button
+          className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+          onClick={sessionData ? () => void signOut() : () => void signIn()}
+        >
+          {sessionData ? "Sign out" : "Sign in"}
+        </button>
         <div className="dropdown-end dropdown">
           {sessionData?.user ? (
             <label
