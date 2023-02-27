@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 import { Header } from "~/components/Header";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "around the world" });
+  // const hello = api.example.hello.useQuery({ text: "around the world" });
 
   return (
     <>
