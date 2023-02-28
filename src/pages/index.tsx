@@ -27,7 +27,7 @@ export default Home;
 const Content: React.FC = () => {
   const { data: sessionData } = useSession(); // is this used?
 
-  const { data: topics, refetch: refectTopics } = api.topic.getAll.useQuery(
+  const { data: topics, refetch: refetchTopics } = api.topic.getAll.useQuery(
     // is this used?
     undefined, // no input
     {
@@ -35,7 +35,11 @@ const Content: React.FC = () => {
     }
   );
 
-  const createTopic = api.topic.create.useMutation({});
+  const createTopic = api.topic.create.useMutation({
+    onSuccess: () => {
+      void refetchTopics()
+    }
+  });
 
   return (
     <div className="mx-5 mt-5 grid grid-cols-4 gap-2">
