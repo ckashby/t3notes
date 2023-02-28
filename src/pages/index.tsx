@@ -6,8 +6,6 @@ import { api, type RouterOutputs } from "~/utils/api";
 import { Header } from "~/components/Header";
 
 const Home: NextPage = () => {
-  // const hello = api.example.hello.useQuery({ text: "around the world" });
-
   return (
     <>
       <Head>
@@ -34,9 +32,9 @@ const Content: React.FC = () => {
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
 
   const { data: topics, refetch: refetchTopics } = api.topic.getAll.useQuery(
-    undefined, // no input  // is this used?
+    undefined, // no input
     {
-      enabled: sessionData?.user !== undefined, // is this used?
+      enabled: sessionData?.user !== undefined,
       onSuccess: (data) => {
         setSelectedTopic(selectedTopic ?? data[0] ?? null)
       }
@@ -87,4 +85,4 @@ const Content: React.FC = () => {
   );
 };
 
-// <div>{JSON.stringify(topics)}</div>;    // is this used?
+// <div>{JSON.stringify(topics)}</div>;
