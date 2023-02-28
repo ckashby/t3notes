@@ -59,6 +59,7 @@ const Content: React.FC = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
+                  setSelectedTopic(topic);
                 }}
               >
                 {topic.title}
