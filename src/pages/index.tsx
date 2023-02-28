@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useSession } from "next-auth/react";
-import { api } from "~/utils/api";
+import { api, type RouterOutputs } from "~/utils/api";
 import { Header } from "~/components/Header";
 
 const Home: NextPage = () => {
@@ -22,23 +23,30 @@ const Home: NextPage = () => {
   );
 };
 
+type Topic = RouterOutputs["topic"]["getAll"][0]
+
 export default Home;
+
 
 const Content: React.FC = () => {
   const { data: sessionData } = useSession(); // is this used?
 
+  const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
+
   const { data: topics, refetch: refetchTopics } = api.topic.getAll.useQuery(
-    // is this used?
-    undefined, // no input
+    undefined, // no input  // is this used?
     {
       enabled: sessionData?.user !== undefined, // is this used?
+      onSuccess: (data) => {
+        setSelectedTopic(selectedTopic ?? data[0] ?? null)
+      }
     }
   );
 
   const createTopic = api.topic.create.useMutation({
     onSuccess: () => {
-      void refetchTopics()
-    }
+      void refetchTopics();
+    },
   });
 
   return (
