@@ -22,23 +22,22 @@ const Home: NextPage = () => {
   );
 };
 
-type Topic = RouterOutputs["topic"]["getAll"][0]
+type Topic = RouterOutputs["topic"]["getAll"][0];
 
 export default Home;
-
 
 const Content: React.FC = () => {
   const { data: sessionData } = useSession();
 
-  const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
+  const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
 
   const { data: topics, refetch: refetchTopics } = api.topic.getAll.useQuery(
     undefined, // no input
     {
       enabled: sessionData?.user !== undefined,
       onSuccess: (data) => {
-        setSelectedTopic(selectedTopic ?? data[0] ?? null)
-      }
+        setSelectedTopic(selectedTopic ?? data[0] ?? null);
+      },
     }
   );
 
@@ -47,6 +46,15 @@ const Content: React.FC = () => {
       void refetchTopics();
     },
   });
+
+  const { data: notes, refetch: refetchNotes } = api.note.getAll.useQuery(
+    {
+      topicId: selectedTopic?.id ?? "",
+    },
+    {
+      enabled: sessionData?.user !== undefined && selectedTopic !== null,
+    }
+  );
 
   return (
     <div className="mx-5 mt-5 grid grid-cols-4 gap-2">
