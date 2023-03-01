@@ -27,7 +27,7 @@ export default Home;
 
 
 const Content: React.FC = () => {
-  const { data: sessionData } = useSession(); // is this used?
+  const { data: sessionData } = useSession();
 
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
 
